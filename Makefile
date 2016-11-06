@@ -1,13 +1,13 @@
-bases=256 4096
+bases=$(notdir $(wildcard bases/*))
 basedirs=$(addsuffix /,$(bases))
-languages=english
+languages=$(notdir $(wildcard langs/*))
 targets=$(foreach base,$(basedirs),$(addprefix $(base),$(languages)))
 
 all: $(targets)
 	@wc -w $(targets)
 
 clean:
-	rm -rf $(basedirs) */.censor
+	rm -rf $(basedirs)
 
 $(basedirs):
 	mkdir -p $@
@@ -16,5 +16,5 @@ $(basedirs):
 	cut -f1 $< > $@
 
 .SECONDEXPANSION:
-$(targets): $$(notdir $$@)/words $$(notdir $$@)/.censor | $$(dir $$@)
-	grep -vwFf $(word 2,$^) $< | head -n $(subst /,,$(dir $@)) | cut -f1 | sort > $@
+$(targets): langs/$$(notdir $$@) bases/$$(subst /,,$$(dir $$@)) | $$(dir $$@)
+	grep -wFf $(word 2,$^) $< | cut -f 2- > $@
