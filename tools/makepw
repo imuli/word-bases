@@ -1,0 +1,11 @@
+#!/bin/sh
+usage () {
+	exec >&2
+	echo $1
+	echo "usage: $0 {language} {bytes of randomness}"
+	exit 1
+}
+data="`dirname $0`/.."
+test -f "$data"/256/"$1" || usage "invalid language"
+test $# -eq 2 || usage "exactly 2 arguments required"
+head -c "$2" /dev/urandom | od -t u1 -An | awk -f tools/code 256/"$1"

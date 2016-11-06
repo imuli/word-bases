@@ -1,0 +1,20 @@
+#!/usr/bin/env awk -f
+function usage(msg) {
+	print msg >"/dev/stderr"
+	print "usage: " ARGV[0] " {table} [files]" >"/dev/stderr"
+	exit 1
+}
+BEGIN {
+	FS=OFS="\t"
+	fileno=0
+	if(ARGC == 1){
+		usage("Lookup file is required.")
+	}
+	if(ARGC == 2){
+		ARGV[ARGC] = "/dev/stdin"
+		ARGC++
+	}
+}
+fileno == 0 { tab[$1] = $2 }
+ENDFILE { fileno++ }
+fileno != 0 { print tab[$1] }

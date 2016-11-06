@@ -17,4 +17,4 @@ $(basedirs):
 
 .SECONDEXPANSION:
 $(targets): langs/$$(notdir $$@) bases/$$(subst /,,$$(dir $$@)) | $$(dir $$@)
-	grep -wFf $(word 2,$^) $< | cut -f 2- > $@
+	awk -f tools/lookup $< $(word 2,$^) > $@
