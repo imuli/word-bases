@@ -4,7 +4,7 @@ This is a cross-linguistic mapping of numbers to semantic points, and those sens
 
 ## Structure
 
-For each base, there is a list of semantic points (from wordnet) in bases/*base*. Semantic points may be correlated across multiple trees (verb, noun, adjective), with the primary point listed first.
+For each base, there is a list of semantic points (from wordnet) in bases/*base*. Semantic points may be correlated across multiple classes (verb, noun, adjective), with the primary point listed first.
 
 Each language has a tab separated file at langs/*language* mapping semantic points to one production word and from multiple synonyms of that sense and homonyms of that word.
 
@@ -23,4 +23,3 @@ Does not currently exist, but will likely be derived from the ~5000 word "core" 
 ### English
 
 English is at version 0.1.0, a set of 256 senses mapped to production words, in need of additional recognition words and probably some rearrangement.
-
